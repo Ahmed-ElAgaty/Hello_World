@@ -16,11 +16,12 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: exit 1
       - run:
-          name: on error
-          command: echo "Hello Error!"
-          when: on_fail
+          name: install ansible and openssh
+          command: 
+            apk add --no-cache openssh
+            service sshd start
+            pip install ansible awscli
   
   say-hello:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
